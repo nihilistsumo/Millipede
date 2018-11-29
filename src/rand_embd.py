@@ -74,15 +74,17 @@ def embed_rand(buckets, aspids, paraids, aspvals):
         aspval_arr = aspvals[i]
         embed_asp_arr = []
         for b in buckets:
-            common_asps = set(asp_arr).intersection(b)
 
             # Commented part was used to store common asp frequency as score for current bucket
+            #common_asps = set(asp_arr).intersection(b)
             #asp_match = len(common_asps)
             #embed_asp_arr.append(asp_match)
 
+            common_asps = set(asp_arr).intersection(b)
+            asp_arr_list = list(asp_arr)
             score = 0
             for a in common_asps:
-                score = score + aspval_arr[list(asp_arr).index(a)]
+                score = score + aspval_arr[asp_arr_list.index(a)]
             embed_asp_arr.append(score)
             #print(str(asp_match)+" ", end="")
         embed_asp_data.append(embed_asp_arr)
