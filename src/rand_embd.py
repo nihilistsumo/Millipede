@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import numpy as np
-import random
+import random, sys
 
 from time import time
 import matplotlib.pyplot as plt
@@ -10,14 +10,8 @@ from sklearn import (manifold, datasets, decomposition, ensemble,
                      discriminant_analysis, random_projection)
 from scipy import special
 
-
-ASP_COUNT = 17979934
-NUM_BUCKETS = 100
-paraids = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-paraids.npy')
-aspids = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-aspids.npy')
-aspvals = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-aspvals.npy')
-
-digits = datasets.load_digits(n_class=6)
+def usage():
+    print("python3 rand_embed.py paraids-file aspids-file aspvals-file aspbucket-file rand-embd-output-file")
 
 def convert_qrels_to_target(qrels, paraids):
     target = []
@@ -205,16 +199,28 @@ def plot_embedding(X, title=None):
 #------------------------------------------------------------------------
 
 random.seed(100)
+
+ASP_COUNT = 17979934
+NUM_BUCKETS = 100
+#paraids = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-paraids.npy')
+#aspids = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-aspids.npy')
+#aspvals = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-aspvals.npy')
+paraids = np.load(sys.argv[1])
+aspids = np.load(sys.argv[2])
+aspvals = np.load(sys.argv[3])
+
 '''
 asp_buc_np = np.array(create_rand_bucket())
 np.save('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-embd-bucket.npy', asp_buc_np)
 print("Buckets created")
 '''
 
-asp_buc_np = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-embd-bucket.npy')
+#asp_buc_np = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-embd-bucket.npy')
+asp_buc_np = np.load(sys.argv[4])
 asp_embd_dat = embed_rand(asp_buc_np, aspids, paraids, aspvals)
 asp_embd_dat_np = np.array(asp_embd_dat)
-np.save('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-rand-embd-sumscore.npy', asp_embd_dat_np)
+#np.save('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-rand-embd-sumscore.npy', asp_embd_dat_np)
+np.save(sys.argv[5])
 
 print(len(asp_buc_np))
 print(len(asp_buc_np[0]))
