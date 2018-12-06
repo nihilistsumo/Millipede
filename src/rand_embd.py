@@ -209,11 +209,11 @@ paraids = np.load(sys.argv[1])
 aspids = np.load(sys.argv[2])
 aspvals = np.load(sys.argv[3])
 
-'''
-asp_buc_np = np.array(create_rand_bucket())
-np.save('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-embd-bucket.npy', asp_buc_np)
-print("Buckets created")
-'''
+if len(sys.argv) == 7 and sys.argv[6] == 'c':
+    asp_buc_np = np.array(create_rand_bucket())
+    print("Creating random bucket")
+    np.save('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-embd-bucket.npy', asp_buc_np)
+    print("Buckets created")
 
 #asp_buc_np = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-embd-bucket.npy')
 asp_buc_np = np.load(sys.argv[4])
