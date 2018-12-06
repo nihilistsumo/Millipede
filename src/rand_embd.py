@@ -202,6 +202,8 @@ random.seed(100)
 
 ASP_COUNT = 17979934
 NUM_BUCKETS = 100
+if len(sys.argv)<6:
+    usage()
 #paraids = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-paraids.npy')
 #aspids = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-aspids.npy')
 #aspvals = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-aspvals.npy')
