@@ -11,7 +11,7 @@ from sklearn import (manifold, datasets, decomposition, ensemble,
 from scipy import special
 
 def usage():
-    print("python3 rand_embed.py paraids-file aspids-file aspvals-file aspbucket-file rand-embd-output-file")
+    print("python3 rand_embed.py paraids-file aspids-file aspvals-file aspbucket-file rand-embd-output-file\n")
 
 def convert_qrels_to_target(qrels, paraids):
     target = []
@@ -204,6 +204,7 @@ ASP_COUNT = 17979934
 NUM_BUCKETS = 100
 if len(sys.argv)<6:
     usage()
+    sys.exit(0)
 #paraids = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-paraids.npy')
 #aspids = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-aspids.npy')
 #aspvals = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-aspvals.npy')
