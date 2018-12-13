@@ -223,7 +223,7 @@ asp_buc_np = np.load(sys.argv[4])
 asp_embd_dat = embed_rand(asp_buc_np, aspids, paraids, aspvals)
 asp_embd_dat_np = np.array(asp_embd_dat)
 #np.save('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-rand-embd-sumscore.npy', asp_embd_dat_np)
-np.save(sys.argv[5])
+np.save(sys.argv[5], asp_embd_dat_np)
 
 print(len(asp_buc_np))
 print(len(asp_buc_np[0]))
