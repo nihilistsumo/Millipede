@@ -63,7 +63,7 @@ def norm(arr):
     for d in arr:
         sum = sum + d
     for i in range(arr.size):
-        if arr[i]<1:
+        if arr[i]<MIN_VAL:
             norm_arr[i] = MIN_VAL
         else:
             norm_arr[i] = arr[i]/float(sum)
@@ -225,7 +225,7 @@ def calc_pairwise_allp(page_paras_dict, method):
 paraids = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-paraids.npy')
 aspids = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-aspids.npy')
 aspvals = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-aspvals.npy')
-rand_embd_dat = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-rand-embd.npy')
+rand_embd_dat = np.load('/home/sumanta/Documents/Porcupine-data/Porcupine_aspvec_python/obj/aspvec-rand-embd-sumscore.npy')
 target = convert_qrels_to_target(
     '/home/sumanta/Documents/Mongoose-data/trec-data/benchmarkY1-train/train.pages.cbor-toplevel.qrels', paraids)
 page_paras = get_page_paras(
