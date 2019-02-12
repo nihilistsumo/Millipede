@@ -47,7 +47,7 @@ paraids: numpy array of 4858 para IDs from by1train
 aspids: numpy 2D array of 4858 arrays of 10000 aspect IDs corresponding to the paragraph indexed in paraids
 aspvals: numpy 2D array of 4858 arrays of 10000 aspect values corresponding to the paragraph indexed in paraids and
 aspect ids in aspids
-rand_embd_dat: numpy 2D array of 4858 arrays of 100 ints representing random embedding in aspect space of the 
+rand_embd_dat: numpy 2D array of 4858 arrays of 100 ints/floats representing random embedding in aspect space of the 
 corresponding paragraph on the same index in paraids
 target: list of 4858 int labels of paragraphs corresponding to paraids index
 page_paras: dictionary of 117 pageIDs to list of paraIDs in the page
