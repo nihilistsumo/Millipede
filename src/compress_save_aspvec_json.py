@@ -37,43 +37,63 @@ def compress_save_json(data, comp_vec_data):
         #print("vec "+str(sys.getsizeof(aspvec_val)))
 
 def split_and_compress_vecs(comp_vec_data, outpath):
-    compressed = {}
-    compressed['paraids'] = []
-    compressed['aspids'] = []
-    compressed['aspvals'] = []
+    paraids = []
+    aspids = []
+    aspvals = []
     count = 0
     for p in comp_vec_data.keys():
-        compressed['paraids'].append(p)
+        paraids.append(p)
+        count = count + 1
+        if (count % 100 == 0):
+            print('.', end=' ')
+        if (count % 1000 == 0):
+            print('+')
+    with open(outpath + "/aspvec-paraids", 'wb') as pid:
+        dill.dump(paraids, pid)
+    print("\nPara IDs saved\n")
+
+    count = 0
+    for p in paraids:
         aspids_curr = []
-        aspvals_curr = []
         for tup in comp_vec_data[p]:
             aspids_curr.append(tup[0])
-            aspvals_curr.append(tup[1])
-        compressed['aspids'].append(aspids_curr)
-        compressed['aspvals'].append(aspvals_curr)
+        aspids.append(aspids_curr)
         count = count + 1
-        if(count>=100):
-            print('.')
-            count = 0
-    save_obj(compressed['paraids'],outpath+"/aspvec-paraids")
-    #save_obj(compressed['vecs'],outpath+"/aspvec-vecs")
+        if (count % 100 == 0):
+            print('.', end=' ')
+        if (count % 1000 == 0):
+            print('+')
     with open(outpath+"/aspvec-aspids",'wb') as aid:
-        dill.dump(compressed['aspids'],aid)
-    with open(outpath+"/aspvec-aspvals",'wb') as aval:
-        dill.dump(compressed['aspvals'],aval)
+        dill.dump(aspids, aid)
+    print("\nASP IDs saved\n")
+
+    count = 0
+    for p in paraids:
+        aspvals_curr = []
+        for tup in comp_vec_data[p]:
+            aspvals_curr.append(tup[1])
+        aspvals.append(aspvals_curr)
+        count = count + 1
+        if (count % 100 == 0):
+            print('.', end=' ')
+        if (count % 1000 == 0):
+            print('+')
+    with open(outpath + "/aspvec-aspvals", 'wb') as aval:
+        dill.dump(aspvals, aid)
+    print("\nASP vals saved\n")
 
 json_dir = sys.argv[1]
 output_path = sys.argv[2]
 
-aspvec_comp_data = {}
-for json_file in os.listdir(json_dir):
-    with open(json_dir+"/"+json_file) as f:
-        json_data = json.load(f)
-        compress_save_json(json_data, aspvec_comp_data)
-        print(sys.getsizeof(aspvec_comp_data))
+# aspvec_comp_data = {}
+# for json_file in os.listdir(json_dir):
+#     with open(json_dir+"/"+json_file) as f:
+#         json_data = json.load(f)
+#         compress_save_json(json_data, aspvec_comp_data)
+#         print(sys.getsizeof(aspvec_comp_data))
+#
+# print("number of paras: "+str(len(aspvec_comp_data.keys())))
+# save_obj(aspvec_comp_data,output_path+"/aspvec-data")
 
-print("number of paras: "+str(len(aspvec_comp_data.keys())))
-save_obj(aspvec_comp_data,output_path+"/aspvec-data")
-
-#vec_data = load_obj(output_path+"/aspvec-data")
-#split_and_compress_vecs(vec_data,output_path)
+vec_data = load_obj(output_path+"/aspvec-data")
+split_and_compress_vecs(vec_data,output_path)
